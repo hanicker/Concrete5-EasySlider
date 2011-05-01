@@ -10,7 +10,12 @@ class EasysliderSlideshowBlockController extends BlockController {
 
 	public function on_page_view(){
 		$html=Loader::helper('html');
-		$this->addHeaderItem($html->javascript('view.js',pkgHandle));
+		$bt = BlockType::getByHandle('easyslider_slideshow');
+		$uh = Loader::helper('concrete/urls');
+		$local = $uh->getBlockTypeAssetsURL($bt);
+		$this->addHeaderItem($html->javascript($uh->getBlockTypeAssetsURL($bt).'/view.js'));
+		$this->addHeaderItem($html->javascript($uh->getBlockTypeAssetsURL($bt).'/slideshow.js'));
+		$this->addHeaderItem($html->css($uh->getBlockTypeAssetsURL($bt).'/slideshow.css'));
 	}
 
 	public function getBlockTypeDescription() {
@@ -51,13 +56,13 @@ class EasysliderSlideshowBlockController extends BlockController {
 			//if(!$c->isEditMode()) echo '</div>';
 		}else{
 			if($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]][0]==$this->bID){//start
-				echo '<div class="slideshow-container">';
+				echo '<div id="slideshow"><div id="slide-pagination"></div><div id="slidesContainer">';
 				echo '<!--SLIDER START-->';
 				echo '<div class="slide">';
 			}else if($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]][count($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]])-1]==$this->bID){//end
 				echo '</div>';
 				echo '<!--SLIDER END-->';
-				echo '</div>';
+				echo '</div></div>';
 			}else{//middle
 				echo '</div>';
 				echo '<!--SLIDER CHANGE-->';
