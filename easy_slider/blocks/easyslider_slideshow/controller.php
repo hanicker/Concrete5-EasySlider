@@ -43,8 +43,9 @@ class EasysliderSlideshowBlockController extends BlockController {
 		if($c->isEditMode()){
 			//if(!$c->isEditMode()) echo '<div id="b'.$this->bID.'-b" class="easyslider_slide">';
 			echo '<script type="text/javascript">';
-			if($this->isFinal($this->bID))
-			echo 'easy_slider_slideshow_ends.push(\''.$this->bID.'\');';
+			if($this->isFinal($this->bID)){
+				echo 'easy_slider_slideshow_ends.push(\''.$this->bID.'\');';
+			}
 			echo 'easy_slider_addBlock(\''.$this->bID.'\');';
 			echo ''.
 					'if(CCM_EDIT_MODE){'.
@@ -56,8 +57,13 @@ class EasysliderSlideshowBlockController extends BlockController {
 			echo '</script>';
 			//if(!$c->isEditMode()) echo '</div>';
 		}else{
+			if($this->isFinal($this->bID)){
+				echo '<script type="text/javascript">';
+				echo 'easy_slider_slideshow_configs.push({ "showControls":'.$this->showControls.', "autostart":'.$this->autostart.'});';
+				echo '</script>';
+			}
 			if($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]][0]==$this->bID){//start
-				echo '<div id="slideshow"><div id="slide-pagination"></div><div id="slidesContainer">';
+				echo '<div id="easysliderslideshow_'.$this->bID.'" class="easysliderslideshow"><div class="slide-pagination"></div><div class="slidesContainer">';
 				echo '<!--SLIDER START-->';
 				echo '<div class="slide">';
 			}else if($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]][count($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]])-1]==$this->bID){//end
@@ -112,6 +118,8 @@ class EasysliderSlideshowBlockController extends BlockController {
 	}
 	function save($data) {
 		$data['slideTime']=intval($data['slideTime']);
+		$data['autostart']=intval($data['autostart']);
+		$data['showControls']=intval($data['showControls']);
 		parent::save($data);
 	}
 }

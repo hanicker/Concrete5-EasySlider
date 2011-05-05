@@ -13,7 +13,11 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 	</div>	
 	<div class="ccm-block-field-group">
 		<h2><?php echo t('Autostart')?></h2>
-		<?php echo $form->checkbox('autostart', '1', $isLast==1); ?>
+		<?php echo t('(Check for yes)') ?> <?php echo $form->checkbox('autostart', '1', $autostart==1); ?>
+	</div>		
+	<div class="ccm-block-field-group">
+		<h2><?php echo t('Show Controls')?></h2>
+		<?php echo t('(Check for yes)') ?> <?php echo $form->checkbox('showControls', '1', $showControls==1); ?>
 	</div>		
 </div>
 <div id="easyslider_slideshow_isNotLast" <?php echo $isLast==1?'style="display:none"':'' ?>>
@@ -24,5 +28,9 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 	<?php 
 		echo $form->hidden('isLast','0');
 		echo $form->hidden('autostart','0');
+		echo $form->hidden('showControls','0');
 	?>
 </div>
+<script type="text/javascript">
+<?php echo $isLast==1?'easyslider_slideshow_enableLast()':'easyslider_slideshow_disableLast()' ?>
+</script>

@@ -1,6 +1,7 @@
 if (!(typeof easy_slider_slideshow != 'undefined')) {
 	var easy_slider_slideshow = new Array();
 	var easy_slider_slideshow_ends = new Array();
+	var easy_slider_slideshow_configs = new Array();
 }
 function easy_slider_addBlock(bID) {
 	easy_slider_slideshow.push(bID);
@@ -11,7 +12,7 @@ function easy_slider_addEndBlock(bID) {
 function easy_slider_start() {
 	(function($) {
 		var started = false;
-		var prev = null;
+
 		for ( var i = 0; i < easy_slider_slideshow.length; i++) {
 			$('div[id*=b' + easy_slider_slideshow[i] + '-]').each(
 					function(index) {
@@ -19,17 +20,18 @@ function easy_slider_start() {
 						if (CCM_EDIT_MODE) {
 							if (!started) {
 								$(this).html('<p>Easy Slider Start</p>');
+								started = true;
 							} else if (!$.inArray(easy_slider_slideshow[i],
-									easy_slider_slideshow_ends)) {
+									easy_slider_slideshow_ends)&&started) {
 								$(this).html('<p>Easy Slider End</p>');
+								started = false;
 							} else {
 								$(this).html('<p>Easy Slider New Slide</p>');
+								started = true;
 							}
 						}
 					});
-			prev = $(this);
-			if (!started)
-				started = true;
+
 		}
 	})(jQuery)
 }
