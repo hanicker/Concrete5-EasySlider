@@ -5,5 +5,16 @@
 			<key />
 			<unsigned />
 		</field>
+		<field name="isLast" type="I">
+		</field>
+		<field name="showControls" type="I">
+		</field>
+		<field name="slideTime" type="I">
+		</field>
+		<field name="autostart" type="I">
+		</field>
+		<!--
+			//TODO: add transitiontype,transitiontime,transitiondirection
+		-->
 	</table>
 </schema>

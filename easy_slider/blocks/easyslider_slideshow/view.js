@@ -13,6 +13,7 @@ function easy_slider_start(){
 	var prev=null;
 	for(var i=0; i<easy_slider_slideshow.length; i++){
 		jQuery('div[id*=b'+easy_slider_slideshow[i]+'-]').each(function(index) {
+			jQuery(this).addClass('easy_slider_block');
 			if(CCM_EDIT_MODE){
 				if(!started){
 					jQuery(this).html('<p>Easy Slider Start</p>');

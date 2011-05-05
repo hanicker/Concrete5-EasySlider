@@ -1,0 +1,41 @@
+/** 
+ * Slideshow style rules.
+ */
+div#slideshow
+{
+	margin:-10px;
+	padding:10px;
+	width:690px;
+	height:654px;
+	margin-top: -36px;
+	position:relative;
+}
+#slideshow #slidesContainer {
+  margin:0 auto;
+  width:690px;
+  height: 654px; 
+  position:relative;
+}
+
+#slideshow #slidesContainer .slide {
+  margin:0 auto;
+  width:690px; /* reduce by 20 pixels of #slidesContainer to avoid horizontal scroll */
+  height:654px;
+}
+
+/** 
+ * Slideshow controls style rules.
+ */
+ #slide-pagination{
+	text-align:right;
+ }
+ #slide-pagination img{
+	margin: 5px 5px -5px 1px;
+ }
+ .control{
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #DDD;
+	text-decoration: none;
+	color: #AAA;
+ }

@@ -6,16 +6,16 @@ class EasysliderSlideshowBlockController extends BlockController {
 	const pkgHandle = 'easy_slider';
 	protected $btTable = 'btEasySliderSlideshow';
 	protected $btInterfaceWidth = "500";
-	protected $btInterfaceHeight = "50";
+	protected $btInterfaceHeight = "390";
 
 	public function on_page_view(){
-		$html=Loader::helper('html');
-		$bt = BlockType::getByHandle('easyslider_slideshow');
-		$uh = Loader::helper('concrete/urls');
-		$local = $uh->getBlockTypeAssetsURL($bt);
-		$this->addHeaderItem($html->javascript($uh->getBlockTypeAssetsURL($bt).'/view.js'));
-		$this->addHeaderItem($html->javascript($uh->getBlockTypeAssetsURL($bt).'/slideshow.js'));
-		$this->addHeaderItem($html->css($uh->getBlockTypeAssetsURL($bt).'/slideshow.css'));
+		/*$html=Loader::helper('html');
+		 $bt = BlockType::getByHandle('easyslider_slideshow');
+		 $uh = Loader::helper('concrete/urls');
+		 $local = $uh->getBlockTypeAssetsURL($bt);
+		 $this->addHeaderItem($html->javascript($uh->getBlockTypeAssetsURL($bt).'/view.js'));
+		 $this->addHeaderItem($html->javascript($uh->getBlockTypeAssetsURL($bt).'/slideshow.js'));
+		 $this->addHeaderItem($html->css($uh->getBlockTypeAssetsURL($bt).'/slideshow.css'));*/
 	}
 
 	public function getBlockTypeDescription() {
@@ -40,10 +40,11 @@ class EasysliderSlideshowBlockController extends BlockController {
 			
 		$this->runSetter();
 			
-		if($c->isEditMode()&&isFinal($this->bID)){
-			echo 'easy_slider_slideshow_ends.push(\''.$this->bID.'\')';
+		if($c->isEditMode()){
 			//if(!$c->isEditMode()) echo '<div id="b'.$this->bID.'-b" class="easyslider_slide">';
 			echo '<script type="text/javascript">';
+			if($this->isFinal($this->bID))
+			echo 'easy_slider_slideshow_ends.push(\''.$this->bID.'\');';
 			echo 'easy_slider_addBlock(\''.$this->bID.'\');';
 			echo ''.
 					'if(CCM_EDIT_MODE){'.
@@ -71,14 +72,13 @@ class EasysliderSlideshowBlockController extends BlockController {
 		}
 	}
 	private function isFinal($bID){
-		return $bID==60; //TODO:change
+		return Block::getByID($bID)->getInstance()->isLast==1; //TODO:change
 	}
 	private function runSetter(){
 		global $c;
 		if(!$c->isEditMode()&&!isset($GLOBALS['concrete5_easyslider_slideshow'])){
 			$GLOBALS['concrete5_easyslider_slideshow']=array();
 			$GLOBALS['concrete5_easyslider_slideshow_rev']=array();
-			echo '<xml>';
 			$page=Page::getCurrentPage();
 			$areas=$this->getCollectionAreas($page->cID);
 			foreach($areas as $area){
@@ -102,7 +102,6 @@ class EasysliderSlideshowBlockController extends BlockController {
 						}*/
 				}
 			}
-			echo '</xml>';
 		}
 	}
 	private function getCollectionAreas($cID){
@@ -110,6 +109,10 @@ class EasysliderSlideshowBlockController extends BlockController {
 		$r=$db->query('select DISTINCT(arHandle) from Areas where cID=',array($cID));
 		$rows = $r->GetAll();
 		return $rows;
+	}
+	function save($data) {
+		$data['slideTime']=intval($data['slideTime']);
+		parent::save($data);
 	}
 }
 
