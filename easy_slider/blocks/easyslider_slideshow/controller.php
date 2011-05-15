@@ -59,7 +59,7 @@ class EasysliderSlideshowBlockController extends BlockController {
 		}else{
 			if($this->isFinal($this->bID)){
 				echo '<script type="text/javascript">';
-				echo 'easy_slider_slideshow_configs.push({ "showControls":'.$this->showControls.', "autostart":'.$this->autostart.'});';
+				echo 'easy_slider_slideshow_configs.push({ "showControls":'.$this->showControls.', "autostart":'.$this->autostart.', "slideTime":'.$this->slideTime.'});';
 				echo '</script>';
 			}
 			if($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]][0]==$this->bID){//start
