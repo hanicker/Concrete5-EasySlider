@@ -11,23 +11,22 @@ function easy_slider_addEndBlock(bID) {
 }
 function easy_slider_start() {
 	(function($) {
-		var started = false;
+		var lastend = true;
 
 		for ( var i = 0; i < easy_slider_slideshow.length; i++) {
 			$('div[id*=b' + easy_slider_slideshow[i] + '-]').each(
 					function(index) {
 						$(this).addClass('easy_slider_block');
 						if (CCM_EDIT_MODE) {
-							if (!started) {
+							if (lastend) {
 								$(this).html('<p>Easy Slider Start</p>');
-								started = true;
-							} else if (!$.inArray(easy_slider_slideshow[i],
-									easy_slider_slideshow_ends)&&started) {
+								lastend = false;
+							} else if ($.inArray(easy_slider_slideshow[i],
+									easy_slider_slideshow_ends)> -1) {
 								$(this).html('<p>Easy Slider End</p>');
-								started = false;
+								lastend = true;
 							} else {
-								$(this).html('<p>Easy Slider New Slide</p>');
-								started = true;
+								$(this).html('<p>Easy Slider Change Slide</p>');
 							}
 						}
 					});
@@ -35,6 +34,8 @@ function easy_slider_start() {
 		}
 	})(jQuery)
 }
+var easyslider_slideshowblock_path = CCM_REL
++ '/packages/easy_slider/blocks/easyslider_slideshow';
 jQuery(document).ready(function() {
 	easy_slider_start();
 });

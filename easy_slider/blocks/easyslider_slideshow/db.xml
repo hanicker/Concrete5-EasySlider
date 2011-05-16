@@ -9,6 +9,8 @@
 		</field>
 		<field name="showControls" type="I">
 		</field>
+		<field name="showPagination" type="I">
+		</field>		
 		<field name="slideTime" type="I">
 		</field>
 		<field name="autostart" type="I">
