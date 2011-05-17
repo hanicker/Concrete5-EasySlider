@@ -20,6 +20,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+var easyslider_slide_slideshowindex=0;
 (function($){
 	$.fn.slides = function( option ) {
 		// override defaults with specified option
@@ -41,7 +42,7 @@
 			var playAnimate=function(){
 				clearTimeout(elem.data('interval'));
 				animate('next', effect);
-				playInterval = setTimeout(playAnimate, option.playCustom(current));
+				playInterval = setTimeout(playAnimate, option.playCustom(option.index,current));
 				elem.data('interval',playInterval);
 			}			
 			// animate slides
@@ -249,7 +250,7 @@
 						// clear pause timeout
 						clearTimeout(elem.data('pause'));
 						// start play interval after pause
-						playInterval = setTimeout(playAnimate, option.playCustom(current));
+						playInterval = setTimeout(playAnimate, option.playCustom(option.index,current));
 						// store interval id
 						elem.data('interval',playInterval);
 					},option.pause);
@@ -479,7 +480,7 @@
 		
 			if (option.play) {
 				// set interval
-				playInterval = setTimeout(playAnimate, option.playCustom(current));
+				playInterval = setTimeout(playAnimate, option.playCustom(option.index,current));
 				// store interval id
 				elem.data('interval',playInterval);
 			}
@@ -516,7 +517,8 @@
 		animationStart: function(){}, // Function called at the start of animation
 		animationComplete: function(){}, // Function called at the completion of animation
 		slidesLoaded: function() {}, // Function is called when slides is fully loaded
-		playCustom: function(slideindex){ return this.play}
+		index:0,
+		playCustom: function(index,slideindex){ return this.play}
 	};
 	
 	// Randomize slide order on load

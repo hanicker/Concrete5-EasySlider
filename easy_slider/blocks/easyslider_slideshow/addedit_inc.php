@@ -24,6 +24,10 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 		<?php echo t('(Check for yes)') ?> <?php echo $form->checkbox('showPagination', '1', $showPagination==1); ?>
 	</div>		
 	<div class="ccm-block-field-group">
+		<h2><?php echo t('Hover (mouse) pause')?></h2>
+		<?php echo t('(Check for yes)') ?> <?php echo $form->checkbox('hoverPause', '1', $hoverPause==1); ?>
+	</div>		
+	<div class="ccm-block-field-group">
 		<h2><?php echo t('In case theme you are using has a block wrapper set for this area (Advanced Option)')?></h2>
 		<?php echo t('(Check for yes)') ?> <?php echo $form->checkbox('hasWrapper', '1', !empty($wrapperStart)||!empty($wrapperEnd)); ?>
 	</div>
@@ -48,6 +52,7 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 		echo $form->hidden('autostart','0');
 		echo $form->hidden('showControls','0');
 		echo $form->hidden('showPagination','0');
+		echo $form->hidden('hoverPause','0');
 	?>
 </div>
 <script type="text/javascript">

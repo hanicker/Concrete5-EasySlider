@@ -11,5 +11,40 @@
 			.ready(
 					function() {
 						$('.easysliderslideshow.styled').append('<a href="#" class="prev"><img src="'+easyslider_slideshowblock_path+'/templates/styled/images/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a><a href="#" class="next"><img src="'+easyslider_slideshowblock_path+'/templates/styled/images/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>');
+						
+						//Activate slideshow
+						$('.easysliderslideshow.styled')
+								.each(
+										function(index) {
+											var easyslider_autostart = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['autostart'];
+											var easyslider_display_control_panel = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['showControls'];
+											var easyslider_display_pagination = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['showPagination'];
+											var easyslider_slide_viewing_time = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['slideTime'];
+											var easyslider_slide_hover_pause = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['hoverPause'];
+											if (easyslider_autostart == 0)
+												easyslider_slide_viewing_time = 0;
+											var playCustom = function(sindex,current) {
+												if (easyslider_slide_viewing_time != 0)
+													return easyslider_slide_viewing_time;
+												if (easy_slider_slideshow_configs[sindex]['slideTimes'][current] != 0) {
+													return easy_slider_slideshow_configs[sindex]['slideTimes'][current];
+												}
+												return 6000;
+											}
+											slide = $(this)
+													.slides(
+															{//Here you can use slidejs settings, see them in http://slidesjs.com/
+																preload : true,
+																generateNextPrev : (easyslider_display_control_panel == 1),
+																generatePagination : (easyslider_display_pagination == 1),
+																play : 1,
+																pause : 3000,
+																hoverPause : easyslider_slide_hover_pause,
+																autoHeight: true,
+																playCustom : playCustom,
+																index:easyslider_slide_slideshowindex
+															});
+											easyslider_slide_slideshowindex++;
+										});						
 					});
 })(jq15s)

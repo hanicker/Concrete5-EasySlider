@@ -6,17 +6,9 @@
 //TODO: correct info
 // Enhancements
 (function($) {
-
+	
 	var easyslider_slideshowblock_path = CCM_REL
 			+ '/packages/easy_slider/blocks/easyslider_slideshow';
-
-	var easyslider_slideshow_start_mode = false;
-	var easyslider_autostart = true;
-	var easyslider_rewind_easyslider_slideshow = true;
-	var easyslider_display_control_panel = true;
-
-	var easyslider_slide_transition_time = 1000;
-	var easyslider_slide_viewing_time;
 
 	$(document)
 			.ready(
@@ -34,35 +26,40 @@
 									$('.easysliderslideshow .slides_container',this).html(txt);
 								});
 						// End code to remove block wrappers
-						$('.easysliderslideshow')
+						
+						//Activate slideshow
+						$('.easysliderslideshow.default')
 								.each(
 										function(index) {
-											easyslider_autostart = easy_slider_slideshow_configs[index]['autostart'];
-											easyslider_display_control_panel = easy_slider_slideshow_configs[index]['showControls'];
-											easyslider_display_pagination = easy_slider_slideshow_configs[index]['showPagination'];
-											easyslider_slide_viewing_time = easy_slider_slideshow_configs[index]['slideTime'];
+											var easyslider_autostart = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['autostart'];
+											var easyslider_display_control_panel = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['showControls'];
+											var easyslider_display_pagination = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['showPagination'];
+											var easyslider_slide_viewing_time = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['slideTime'];
+											var easyslider_slide_hover_pause = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['hoverPause'];
 											if (easyslider_autostart == 0)
 												easyslider_slide_viewing_time = 0;
-											var playCustom = function(current) {
+											var playCustom = function(sindex,current) {
 												if (easyslider_slide_viewing_time != 0)
 													return easyslider_slide_viewing_time;
-												if (easy_slider_slideshow_configs[index]['slideTimes'][current] != 0) {
-													return easy_slider_slideshow_configs[index]['slideTimes'][current];
+												if (easy_slider_slideshow_configs[sindex]['slideTimes'][current] != 0) {
+													return easy_slider_slideshow_configs[sindex]['slideTimes'][current];
 												}
 												return 6000;
 											}
 											slide = $(this)
 													.slides(
-															{
+															{//Here you can use slidejs settings, see them in http://slidesjs.com/
 																preload : true,
 																generateNextPrev : (easyslider_display_control_panel == 1),
 																generatePagination : (easyslider_display_pagination == 1),
 																play : 1,
 																pause : 3000,
-																hoverPause : true,
+																hoverPause : easyslider_slide_hover_pause,
 																autoHeight: true,
-																playCustom : playCustom
+																playCustom : playCustom,
+																index:easyslider_slide_slideshowindex
 															});
-										});
+											easyslider_slide_slideshowindex++;
+										});			
 					});
 })(jq15s)

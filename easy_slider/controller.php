@@ -6,7 +6,7 @@ class EasySliderPackage extends Package {
 
 	protected $pkgHandle = 'easy_slider';
 	protected $appVersionRequired = '5.4.0';
-	protected $pkgVersion = '1.2';
+	protected $pkgVersion = '1.3';
 	
 	public function getPackageDescription() {
 		return t('Easily add slideshow of blocks');

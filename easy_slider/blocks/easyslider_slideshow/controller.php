@@ -1,6 +1,6 @@
 <?php
-
 defined('C5_EXECUTE') or die(_("Access Denied."));
+
 class EasysliderSlideshowBlockController extends BlockController {
 
 	const pkgHandle = 'easy_slider';
@@ -24,13 +24,7 @@ class EasysliderSlideshowBlockController extends BlockController {
 		$this->addHeaderItem('<script type="text/javascript">var jq15s = jQuery.noConflict(true);$=jqC5;jQuery=jqC5</script>');
 
 	}
-
-	/*public function on_page_view(){
-		$this->addHeaderItem($html->javascript($uh->getBlockTypeAssetsURL($bt).'/view.js'));
-		$this->addHeaderItem($html->javascript($uh->getBlockTypeAssetsURL($bt).'/slideshow.js'));
-		$this->addHeaderItem($html->css($uh->getBlockTypeAssetsURL($bt).'/slideshow.css'));
-		}*/
-
+	
 	public function getBlockTypeDescription() {
 		return t("Create a Slider of Blocks");
 	}
@@ -39,15 +33,9 @@ class EasysliderSlideshowBlockController extends BlockController {
 		return t("Easy Slider Slideshow");
 	}
 
-	/*
-		public function getPreviousStep(){
-		return isset($GLOBALS['concrete5_easy_slider_prevstep'])?$GLOBALS['concrete5_easy_slider_prevstep']:null;
-		}
-		public function setStep($step){
-		$GLOBALS['concrete5_easy_slider_prevstep']=$step;
-		}
-		*/
-
+	/**
+	 * Generates html and part of javascript needed for slideshow
+	 */
 	public function view(){
 		global $c;
 			
@@ -72,7 +60,6 @@ class EasysliderSlideshowBlockController extends BlockController {
 		}else{
 			$enclosingStart=$GLOBALS['concrete5_easyslider_slideshow_wrapstart'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]];
 			$enclosingEnd=$GLOBALS['concrete5_easyslider_slideshow_wrapend'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]];
-			//$area=new Area($GLOBALS['concrete5_easyslider_slideshow_area'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]]);
 			if($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]][0]==$this->bID){//start
 				echo '<div id="easysliderslideshow_'.$this->bID.'" class="easysliderslideshow '.$this->getTemplateName().'"><div class="slides_container">';
 				echo '<script type="text/javascript">easy_slider_slideshow_configs['.$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID].']={"slideTimes":new Array()}</script>';
@@ -86,7 +73,7 @@ class EasysliderSlideshowBlockController extends BlockController {
 				echo '<!--SLIDER END-->';
 				if($this->isFinal($this->bID)){
 					echo '<script type="text/javascript">';
-					echo 'easy_slider_slideshow_configs['.$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID].']={ "showControls":'.$this->showControls.', "showPagination":'.$this->showPagination.', "autostart":'.$this->autostart.', "slideTime":'.$this->slideTime.', "slideTimes":easy_slider_slideshow_configs['.$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID].']["slideTimes"]};';
+					echo 'easy_slider_slideshow_configs['.$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID].']={ "showControls":'.$this->showControls.', "showPagination":'.$this->showPagination.', "autostart":'.$this->autostart.', "hoverPause":'.$this->hoverPause.', "slideTime":'.$this->slideTime.', "slideTimes":easy_slider_slideshow_configs['.$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID].']["slideTimes"]};';
 					//echo 'easy_slider_slideshow_configs.push({ "showControls":'.$this->showControls.', "autostart":'.$this->autostart.', "slideTime":'.$this->slideTime.'});';
 					echo '</script>';
 				}
@@ -101,9 +88,19 @@ class EasysliderSlideshowBlockController extends BlockController {
 			}
 		}
 	}
+	
+	/**
+	 * Check if a Block is the end of a slideshow
+	 * @param int $bID
+	 * @return boolean
+	 */
 	private function isFinal($bID){
 		return Block::getByID($bID)->getInstance()->isLast==1; //TODO:change
 	}
+	
+	/**
+	 * Setup some global variables describing slides used to define html and javascript
+	 */
 	private function runSetter(){
 		global $c;
 		if(!$c->isEditMode()&&!isset($GLOBALS['concrete5_easyslider_slideshow'])){
@@ -139,6 +136,11 @@ class EasysliderSlideshowBlockController extends BlockController {
 			}
 		}
 	}
+	
+	/**
+	 * Returns the name of the template used by a block
+	 * @return string|Ambiguous
+	 */
 	private function getTemplateName(){
 		$db = Loader::db();
 		$r=$db->query('select bFilename from Blocks where bID = ?',array($this->bID));
@@ -148,17 +150,25 @@ class EasysliderSlideshowBlockController extends BlockController {
 			return 'default';
 		return $name;
 	}
+	
+	/**
+	 * Returns arHandles of Areas inside a Collection (Page)
+	 * @param unknown_type $cID
+	 * @return Ambiguous
+	 */
 	private function getCollectionAreas($cID){
 		$db = Loader::db();
 		$r=$db->query('select DISTINCT(arHandle) from Areas where cID=?',array($cID));
 		$rows = $r->GetAll();
 		return $rows;
 	}
+	
 	function save($data) {
 		$data['slideTime']=intval($data['slideTime']);
 		$data['autostart']=intval($data['autostart']);
 		$data['showControls']=intval($data['showControls']);
 		$data['showPagination']=intval($data['showPagination']);
+		$data['hoverPause']=intval($data['hoverPause']);
 		parent::save($data);
 	}
 }
