@@ -22,7 +22,21 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 	<div class="ccm-block-field-group">
 		<h2><?php echo t('Show Pagination')?></h2>
 		<?php echo t('(Check for yes)') ?> <?php echo $form->checkbox('showPagination', '1', $showPagination==1); ?>
-	</div>			
+	</div>		
+	<div class="ccm-block-field-group">
+		<h2><?php echo t('In case theme you are using has a block wrapper set for this area (Advanced Option)')?></h2>
+		<?php echo t('(Check for yes)') ?> <?php echo $form->checkbox('hasWrapper', '1', !empty($wrapperStart)||!empty($wrapperEnd)); ?>
+	</div>
+	<div id="easyslider_slideshow_isLast_hasWrapper" <?php echo (empty($wrapperStart)&&empty($wrapperEnd))?'style="display:none"':'' ?>>
+		<div class="ccm-block-field-group">
+			<h2><?php echo t('Wrapper Start')?></h2>
+			<?php echo $form->textArea('wrapperStart',$wrapperStart)?>
+		</div>	
+		<div class="ccm-block-field-group">
+			<h2><?php echo t('Wrapper End')?></h2>
+			<?php echo $form->textArea('wrapperEnd',$wrapperEnd)?>
+		</div>			
+	</div>
 </div>
 <div id="easyslider_slideshow_isNotLast" <?php echo $isLast==1?'style="display:none"':'' ?>>
 	<div class="ccm-block-field-group">

@@ -70,13 +70,18 @@ class EasysliderSlideshowBlockController extends BlockController {
 			echo '</script>';
 			//if(!$c->isEditMode()) echo '</div>';
 		}else{
+			$enclosingStart=$GLOBALS['concrete5_easyslider_slideshow_wrapstart'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]];
+			$enclosingEnd=$GLOBALS['concrete5_easyslider_slideshow_wrapend'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]];
+			//$area=new Area($GLOBALS['concrete5_easyslider_slideshow_area'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]]);
 			if($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]][0]==$this->bID){//start
 				echo '<div id="easysliderslideshow_'.$this->bID.'" class="easysliderslideshow '.$this->getTemplateName().'"><div class="slides_container">';
 				echo '<script type="text/javascript">easy_slider_slideshow_configs['.$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID].']={"slideTimes":new Array()}</script>';
 				echo '<script type="text/javascript">easy_slider_slideshow_configs['.$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID].']["slideTimes"].push('.$this->slideTime.')</script>';
 				echo '<!--SLIDER START-->';
 				echo '<div class="slide">';
+				echo '<!--START REPLACE-->'.$enclosingStart;
 			}else if($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]][count($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]])-1]==$this->bID){//end
+				echo $enclosingEnd.'<!--END REPLACE-->';
 				echo '</div>';
 				echo '<!--SLIDER END-->';
 				if($this->isFinal($this->bID)){
@@ -87,10 +92,12 @@ class EasysliderSlideshowBlockController extends BlockController {
 				}
 				echo '</div></div>';
 			}else{//middle
+				echo $enclosingEnd.'<!--END REPLACE-->';
 				echo '</div>';
 				echo '<script type="text/javascript">easy_slider_slideshow_configs['.$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID].']["slideTimes"].push('.$this->slideTime.')</script>';
 				echo '<!--SLIDER CHANGE-->';
 				echo '<div class="slide">';
+				echo '<!--START REPLACE-->'.$enclosingStart;
 			}
 		}
 	}
@@ -102,6 +109,8 @@ class EasysliderSlideshowBlockController extends BlockController {
 		if(!$c->isEditMode()&&!isset($GLOBALS['concrete5_easyslider_slideshow'])){
 			$GLOBALS['concrete5_easyslider_slideshow']=array();
 			$GLOBALS['concrete5_easyslider_slideshow_rev']=array();
+			$GLOBALS['concrete5_easyslider_slideshow_wrapstart']=array();
+			$GLOBALS['concrete5_easyslider_slideshow_wrapend']=array();
 			$page=Page::getCurrentPage();
 			$areas=$this->getCollectionAreas($page->cID);
 			foreach($areas as $area){
@@ -112,6 +121,9 @@ class EasysliderSlideshowBlockController extends BlockController {
 						$slideshow[]=$block->bID;
 						if($this->isFinal($block->bID)){
 							$GLOBALS['concrete5_easyslider_slideshow'][]=$slideshow;
+							//$GLOBALS['concrete5_easyslider_slideshow_area'][]=$area['arHandle'];
+							$GLOBALS['concrete5_easyslider_slideshow_wrapstart'][]=Block::getByID($block->bID)->getInstance()->wrapperStart;
+							$GLOBALS['concrete5_easyslider_slideshow_wrapend'][]=Block::getByID($block->bID)->getInstance()->wrapperEnd;
 							//apply reverse start
 							foreach($slideshow as $sbID){
 								$GLOBALS['concrete5_easyslider_slideshow_rev'][$sbID]=count($GLOBALS['concrete5_easyslider_slideshow'])-1;

@@ -10,10 +10,23 @@ var easyslider_slideshow_disableLast = function(){
     jQuery('#easyslider_slideshow_isLast').hide();
     jQuery('#easyslider_slideshow_isNotLast').show();
 }
+var easyslider_slideshow_enableWrapper = function(){
+	jQuery('#easyslider_slideshow_isLast_hasWrapper').show();
+}
+var easyslider_slideshow_disableWrapper = function(){
+	jQuery('#easyslider_slideshow_isLast_hasWrapper').hide();
+}
 jQuery('#isLast').change(function () {
     if (jQuery(this).attr("checked")) {
     	easyslider_slideshow_enableLast();
         return;
     }
     easyslider_slideshow_disableLast();
+});
+jQuery('#hasWrapper').change(function () {
+    if (jQuery(this).attr("checked")) {
+    	easyslider_slideshow_enableWrapper();
+        return;
+    }
+    easyslider_slideshow_disableWrapper();
 });

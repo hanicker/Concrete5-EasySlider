@@ -24,7 +24,6 @@
 						// Start code to remove block wrappers
 						$('.easysliderslideshow').each(
 								function(index) {
-									// alert($(this).html());
 									var txt = "";
 									$('.slide', this).each(
 											function() {
@@ -32,7 +31,6 @@
 														+ $(this).html()
 														+ '</div>';
 											});
-									// alert(txt);
 									$('.easysliderslideshow .slides_container',this).html(txt);
 								});
 						// End code to remove block wrappers

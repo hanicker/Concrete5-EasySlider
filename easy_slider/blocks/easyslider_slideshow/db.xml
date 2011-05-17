@@ -15,6 +15,10 @@
 		</field>
 		<field name="autostart" type="I">
 		</field>
+		<field name="wrapperStart" type="X2">
+		</field>	
+		<field name="wrapperEnd" type="X2">
+		</field>				
 		<!--
 			//TODO: add transitiontype,transitiontime,transitiondirection
 		-->
