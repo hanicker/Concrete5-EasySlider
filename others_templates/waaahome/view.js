@@ -10,10 +10,10 @@
 	$(document)
 			.ready(
 					function() {
-						$('.easysliderslideshow.styled').append('<a href="#" class="prev"><img src="'+easyslider_slideshowblock_path+'/templates/styled/images/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a><a href="#" class="next"><img src="'+easyslider_slideshowblock_path+'/templates/styled/images/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>');
+						$('.easysliderslideshow.waaahome').prepend('<div class="controls"><div><a href="#" class="prev">&laquo;</a></div><div><a href="#" class="play"><img src="'+easyslider_slideshowblock_path+'/templates/waaahome/images/play.png" width="16" height="16" alt="Play"></a></div><div style="display:none"><a href="#" class="stop"><img src="'+easyslider_slideshowblock_path+'/templates/waaahome/images/pause.png" width="16" height="16" alt="Stop"></a></div><div><a href="#" class="next">&raquo;</a></div></div>');
 						
 						//Activate slideshow
-						$('.easysliderslideshow.styled')
+						$('.easysliderslideshow.waaahome')
 								.each(
 										function(index) {
 											var easyslider_autostart = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['autostart'];
@@ -31,19 +31,34 @@
 												}
 												return 6000;
 											}
-											slide = $(this)
+											var slide = $(this)
 													.slides(
 															{//Here you can use slidejs settings, see them in http://slidesjs.com/
-																preload : true,
+																preload : false,
 																generateNextPrev : (easyslider_display_control_panel == 1),
 																generatePagination : (easyslider_display_pagination == 1),
 																play : 1,
-																pause : 3000,
+																pause : 500,
 																hoverPause : easyslider_slide_hover_pause,
 																autoHeight: true,
 																playCustom : playCustom,
 																index:easyslider_slide_slideshowindex
 															});
+											var ele=$(this);
+											function switchPlayPause(){
+												if($('.play',ele).parent().is(":visible")){
+													$('.play',ele).parent().hide();
+													$('.stop',ele).parent().show();
+												}else{
+													$('.play',ele).parent().show();
+													$('.stop',ele).parent().hide();											
+												}
+											}
+											if(playCustom(0)!=0){
+												switchPlayPause();
+											}
+											$('.play',this).click(function(){switchPlayPause()});
+											$('.stop',this).click(function(){switchPlayPause()});
 											easyslider_slide_slideshowindex++;
 										});						
 					});

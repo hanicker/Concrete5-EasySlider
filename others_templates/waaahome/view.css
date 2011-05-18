@@ -2,9 +2,8 @@
 	Slideshow style
 */
 
-.easysliderslideshow.styled {
+.easysliderslideshow.waaahome {
 	position:relative;
-	margin-left:37px;
 	width:690px;
 }
 
@@ -16,9 +15,7 @@
 	Set to display none, prevents content flash
 */
 
-.easysliderslideshow.styled .slides_container {
-	background-color:#EEE;
-	border:1px solid black;
+.easysliderslideshow.waaahome .slides_container {
 	width:690px;
 	height:650px;
 	overflow:hidden;
@@ -35,8 +32,7 @@
 	Set to display block
 */
 
-.easysliderslideshow.styled .slide {
-	padding:20px;
+.easysliderslideshow.waaahome .slide {
 	width:690px;
 	height:650px;
 	display:block;
@@ -45,46 +41,23 @@
 /*
 	Next/prev buttons
 */
-.easysliderslideshow.styled .next,.easysliderslideshow.styled .prev {
-	position:absolute;
-	top:107px;
-	left:-39px;
-	width:24px;
-	height:43px;
-	display:block;
-	z-index:101;
+.easysliderslideshow.waaahome .controls{
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	text-align:center;
+	text-decoration: none;
+	color: #AAA;
+	float:right;
 }
 
-.easysliderslideshow.styled .next {
-	left:585px;
+.easysliderslideshow.waaahome .controls div {
+	border:1px solid black;
+	height:16px;
+	width:16px;
+	float:left;
+	margin-left:2px;
 }
 
 /*
 	Pagination
 */
-
-.easysliderslideshow.styled .pagination {
-	margin:26px auto 0;
-	width:100px;
-}
-
-.easysliderslideshow.styled .pagination li {
-	float:left;
-	margin:0 1px;
-	list-style:none;
-}
-
-.easysliderslideshow.styled .pagination li a {
-	display:block;
-	width:12px;
-	height:0;
-	padding-top:12px;
-	background-image:url(../styled/images/pagination.png);
-	background-position:0 0;
-	float:left;
-	overflow:hidden;
-}
-
-.easysliderslideshow.styled .pagination li.current a {
-	background-position:0 -12px;
-}

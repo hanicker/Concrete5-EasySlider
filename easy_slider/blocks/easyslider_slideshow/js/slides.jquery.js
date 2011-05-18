@@ -403,7 +403,8 @@ var easyslider_slide_slideshowindex=0;
 				});
 				control.bind('mouseleave',function(){
 					// on mouse leave start pause timeout
-					pause();
+					if(option.play!=0)
+						pause();
 				});
 			}
 			
@@ -435,12 +436,14 @@ var easyslider_slide_slideshowindex=0;
 			$('.' + option.playb ,elem).click(function(e){
 				e.preventDefault();
 				animate('next', effect);
+				option.play=1;
 				play();
 			});	
 
 			// stop button
 			$('.' + option.stopb ,elem).click(function(e){
 				e.preventDefault();
+				option.play=0;
 				stop();
 			});			
 			
