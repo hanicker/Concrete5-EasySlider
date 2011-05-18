@@ -239,6 +239,13 @@ var easyslider_slide_slideshowindex=0;
 				// clear interval from stored id
 				clearTimeout(elem.data('interval'));
 			}
+			
+			function play(){
+				// start play interval after pause
+				playInterval = setTimeout(playAnimate, option.playCustom(option.index,current));
+				// store interval id
+				elem.data('interval',playInterval);
+			}
 
 			function pause() {
 				if (option.pause) {
@@ -424,6 +431,19 @@ var easyslider_slide_slideshowindex=0;
 				animate('prev', effect);
 			});
 			
+			// play button
+			$('.' + option.playb ,elem).click(function(e){
+				e.preventDefault();
+				animate('next', effect);
+				play();
+			});	
+
+			// stop button
+			$('.' + option.stopb ,elem).click(function(e){
+				e.preventDefault();
+				stop();
+			});			
+			
 			// generate pagination
 			if (option.generatePagination) {
 				// create unordered list
@@ -495,6 +515,8 @@ var easyslider_slide_slideshowindex=0;
 		generateNextPrev: false, // boolean, Auto generate next/prev buttons
 		next: 'next', // string, Class name for next button
 		prev: 'prev', // string, Class name for previous button
+		stopb: 'stop', // string, Class name for stop button
+		playb: 'play',// string, Class name for play button
 		pagination: true, // boolean, If you're not using pagination you can set to false, but don't have to
 		generatePagination: true, // boolean, Auto generate pagination
 		prependPagination: false, // boolean, prepend pagination
