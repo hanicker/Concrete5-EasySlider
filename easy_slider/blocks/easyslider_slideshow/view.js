@@ -31,18 +31,18 @@
 						$('.easysliderslideshow.default')
 								.each(
 										function(index) {
-											var easyslider_autostart = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['autostart'];
-											var easyslider_display_control_panel = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['showControls'];
-											var easyslider_display_pagination = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['showPagination'];
-											var easyslider_slide_viewing_time = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['slideTime'];
-											var easyslider_slide_hover_pause = easy_slider_slideshow_configs[easyslider_slide_slideshowindex]['hoverPause'];
+											var easyslider_autostart = easy_slider_slideshow_configs['default'][index]['autostart'];
+											var easyslider_display_control_panel = easy_slider_slideshow_configs['default'][index]['showControls'];
+											var easyslider_display_pagination = easy_slider_slideshow_configs['default'][index]['showPagination'];
+											var easyslider_slide_viewing_time = easy_slider_slideshow_configs['default'][index]['slideTime'];
+											var easyslider_slide_hover_pause = easy_slider_slideshow_configs['default'][index]['hoverPause'];
 											if (easyslider_autostart == 0)
 												easyslider_slide_viewing_time = 0;
 											var playCustom = function(sindex,current) {
 												if (easyslider_slide_viewing_time != 0)
 													return easyslider_slide_viewing_time;
-												if (easy_slider_slideshow_configs[sindex]['slideTimes'][current] != 0) {
-													return easy_slider_slideshow_configs[sindex]['slideTimes'][current];
+												if (easy_slider_slideshow_configs['default'][sindex]['slideTimes'][current] != 0) {
+													return easy_slider_slideshow_configs['default'][sindex]['slideTimes'][current];
 												}
 												return 6000;
 											}
@@ -57,9 +57,8 @@
 																hoverPause : easyslider_slide_hover_pause,
 																autoHeight: true,
 																playCustom : playCustom,
-																index:easyslider_slide_slideshowindex
+																index:index
 															});
-											easyslider_slide_slideshowindex++;
 										});			
 					});
 })(jq15s)

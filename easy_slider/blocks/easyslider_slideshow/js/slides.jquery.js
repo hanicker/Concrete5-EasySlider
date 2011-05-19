@@ -20,7 +20,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-var easyslider_slide_slideshowindex=0;
 (function($){
 	$.fn.slides = function( option ) {
 		// override defaults with specified option

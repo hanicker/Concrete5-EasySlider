@@ -1,8 +1,3 @@
-if (!(typeof easy_slider_slideshow != 'undefined')) {
-	var easy_slider_slideshow = new Array();
-	var easy_slider_slideshow_ends = new Array();
-	var easy_slider_slideshow_configs = new Array();
-}
 function easy_slider_addBlock(bID) {
 	easy_slider_slideshow.push(bID);
 }

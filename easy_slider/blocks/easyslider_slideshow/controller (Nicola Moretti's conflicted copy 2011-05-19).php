@@ -63,7 +63,7 @@ class EasysliderSlideshowBlockController extends BlockController {
 			$enclosingEnd=$GLOBALS['concrete5_easyslider_slideshow_wrapend'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]];
 			if($GLOBALS['concrete5_easyslider_slideshow'][$GLOBALS['concrete5_easyslider_slideshow_rev'][$this->bID]][0]==$this->bID){//start
 				echo '<div id="easysliderslideshow_'.$this->bID.'" class="easysliderslideshow '.$templateName.'"><div class="slides_container">';
-				echo '<script type="text/javascript">easy_slider_current_template="'.$templateName.'";if (!(typeof easy_slider_slideshow_configs[easy_slider_current_template] != \'undefined\')) {easy_slider_slideshow_configs[easy_slider_current_template]=new Array();}easy_slider_slideshow_configs_temp={"slideTimes":new Array()}</script>';
+				echo '<script type="text/javascript">easy_slider_current_template="'.$templateName.'";easy_slider_slideshow_configs[easy_slider_current_template]=new Array();easy_slider_slideshow_configs_temp={"slideTimes":new Array()}</script>';
 				echo '<script type="text/javascript">easy_slider_slideshow_configs_temp["slideTimes"].push('.$this->slideTime.')</script>';
 				echo '<!--SLIDER START-->';
 				echo '<div class="slide">';
@@ -103,7 +103,7 @@ class EasysliderSlideshowBlockController extends BlockController {
 	 */
 	private function runSetter(){
 		global $c;
-		if(!isset($GLOBALS['concrete5_easyslider_slideshow_run'])){		
+		if(!$c->isEditMode()&&!isset($GLOBALS['concrete5_easyslider_slideshow'])){
 			echo "
 			<script type=\"text/javascript\">
 			if (!(typeof easy_slider_slideshow != 'undefined')) {
@@ -113,10 +113,7 @@ class EasysliderSlideshowBlockController extends BlockController {
 				var easy_slider_current_template='';
 			}
 			</script>
-			";	
-			$GLOBALS['concrete5_easyslider_slideshow_run']=true;
-		}			
-		if(!$c->isEditMode()&&!isset($GLOBALS['concrete5_easyslider_slideshow'])){
+			";
 			$GLOBALS['concrete5_easyslider_slideshow']=array();
 			$GLOBALS['concrete5_easyslider_slideshow_rev']=array();
 			$GLOBALS['concrete5_easyslider_slideshow_wrapstart']=array();
