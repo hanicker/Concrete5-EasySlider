@@ -29,7 +29,7 @@
 												if (easy_slider_slideshow_configs['styled'][sindex]['slideTimes'][current] != 0) {
 													return easy_slider_slideshow_configs['styled'][sindex]['slideTimes'][current];
 												}
-												return 6000;
+												return 0;
 											}
 											slide = $(this)
 													.slides(
@@ -37,7 +37,7 @@
 																preload : true,
 																generateNextPrev : (easyslider_display_control_panel == 1),
 																generatePagination : (easyslider_display_pagination == 1),
-																play : 1,
+																play : playCustom(index,0),
 																pause : 3000,
 																hoverPause : easyslider_slide_hover_pause,
 																autoHeight: true,
