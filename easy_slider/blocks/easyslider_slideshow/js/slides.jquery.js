@@ -235,12 +235,14 @@
 			} // end animate function
 			
 			function stop() {
-				// clear interval from stored id
+				// clear pause and interval from stored id
+				clearTimeout(elem.data('pause'));
 				clearTimeout(elem.data('interval'));
 			}
 			
 			function play(){
 				// start play interval after pause
+				option.play=1;
 				playInterval = setTimeout(playAnimate, option.playCustom(option.index,current));
 				// store interval id
 				elem.data('interval',playInterval);
@@ -395,7 +397,7 @@
 			}
 			
 			// pause on mouseover
-			if (option.hoverPause && option.play) {
+			if (option.hoverPause) {
 				control.bind('mouseover',function(){
 					// on mouse over stop
 					stop();

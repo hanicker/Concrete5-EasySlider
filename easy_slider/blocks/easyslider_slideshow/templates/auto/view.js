@@ -32,7 +32,7 @@
 												return 0;
 											}
 											if(easyslider_display_control_panel == 1){
-												$('.easysliderslideshow.auto').prepend('<div class="controls"><div><a href="#" class="prev"><img src="'+easyslider_slideshowblock_path+'/templates/auto/images/prev.png" width="16" height="16" alt="Prev"></a></div><div><a href="#" class="play"><img src="'+easyslider_slideshowblock_path+'/templates/auto/images/play.png" width="16" height="16" alt="Play"></a></div><div style="display:none"><a href="#" class="stop"><img src="'+easyslider_slideshowblock_path+'/templates/auto/images/pause.png" width="16" height="16" alt="Stop"></a></div><div><a href="#" class="next"><img src="'+easyslider_slideshowblock_path+'/templates/auto/images/next.png" width="16" height="16" alt="Next"></a></div></div>');											
+												$(this).prepend('<div class="controls"><div><a href="#" class="prev"><img src="'+easyslider_slideshowblock_path+'/templates/auto/images/prev.png" width="16" height="16" alt="Prev"></a></div><div><a href="#" class="play"><img src="'+easyslider_slideshowblock_path+'/templates/auto/images/play.png" width="16" height="16" alt="Play"></a></div><div style="display:none"><a href="#" class="stop"><img src="'+easyslider_slideshowblock_path+'/templates/auto/images/pause.png" width="16" height="16" alt="Stop"></a></div><div><a href="#" class="next"><img src="'+easyslider_slideshowblock_path+'/templates/auto/images/next.png" width="16" height="16" alt="Next"></a></div></div>');											
 											}
 											
 											slide = $(this)
@@ -43,9 +43,9 @@
 																generatePagination : (easyslider_display_pagination == 1),
 																play : (easyslider_autostart == 0)?0:1000,
 																width:width,
-																pause : 3000,
+																pause : 1000,
 																autoHeight: true,
-																hoverPause : easyslider_slide_hover_pause,
+																hoverPause : easyslider_slide_hover_pause==1,
 																playCustom : playCustom,
 																index:index
 															});

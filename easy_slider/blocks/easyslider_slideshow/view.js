@@ -54,7 +54,7 @@
 																generatePagination : (easyslider_display_pagination == 1),
 																play : (easyslider_autostart == 0)?0:1000,
 																pause : 3000,
-																hoverPause : easyslider_slide_hover_pause,
+																hoverPause : easyslider_slide_hover_pause==1,
 																autoHeight: true,
 																playCustom : playCustom,
 																index:index
