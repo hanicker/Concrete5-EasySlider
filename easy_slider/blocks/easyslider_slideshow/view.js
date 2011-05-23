@@ -39,8 +39,6 @@
 											if (easyslider_autostart == 0)
 												easyslider_slide_viewing_time = 0;
 											var playCustom = function(sindex,current) {
-												if (easyslider_autostart == 0)
-													return 0;
 												if (easy_slider_slideshow_configs['default'][sindex]['slideTimes'][current] != 0) {
 													return easy_slider_slideshow_configs['default'][sindex]['slideTimes'][current];
 												}
@@ -54,7 +52,7 @@
 																preload : true,
 																generateNextPrev : (easyslider_display_control_panel == 1),
 																generatePagination : (easyslider_display_pagination == 1),
-																play : playCustom(index,0),
+																play : (easyslider_autostart == 0)?0:1000,
 																pause : 3000,
 																hoverPause : easyslider_slide_hover_pause,
 																autoHeight: true,
