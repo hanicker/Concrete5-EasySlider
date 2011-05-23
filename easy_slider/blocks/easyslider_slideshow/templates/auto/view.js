@@ -26,8 +26,6 @@
 											if (easyslider_autostart == 0)
 												easyslider_slide_viewing_time = 0;
 											var playCustom = function(sindex,current) {
-												if (easyslider_autostart == 0)
-													return 0;
 												if (easy_slider_slideshow_configs['auto'][sindex]['slideTimes'][current] != 0) {
 													return easy_slider_slideshow_configs['auto'][sindex]['slideTimes'][current];
 												}
@@ -45,7 +43,7 @@
 																preload : true,
 																generateNextPrev : false,
 																generatePagination : (easyslider_display_pagination == 1),
-																play : playCustom(index,0),
+																play : (easyslider_autostart == 0)?0:1000,
 																width:width,
 																pause : 3000,
 																autoHeight: true,
