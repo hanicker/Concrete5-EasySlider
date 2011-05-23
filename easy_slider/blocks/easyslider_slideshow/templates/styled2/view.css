@@ -1,0 +1,60 @@
+/*
+	Slideshow style
+*/
+
+.easysliderslideshow.styled2 {
+	position:relative;
+	width:690px;
+}
+
+/*
+	Slides container
+	Important:
+	Set the width of your slides container
+	If height not specified height will be set by the slide content
+	Set to display none, prevents content flash
+*/
+
+.easysliderslideshow.styled2 .slides_container {
+	width:690px;
+	overflow:hidden;
+	position:relative;
+	display:none;
+}
+
+/*
+	Each slide
+	Important:
+	Set the width of your slides
+	Offeset for the 20px of padding
+	If height not specified height will be set by the slide content
+	Set to display block
+*/
+
+.easysliderslideshow.styled2 .slide {
+	width:690px;
+	display:block;
+}
+
+/*
+	Next/prev buttons
+*/
+.easysliderslideshow.styled2 .controls{
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	text-align:center;
+	text-decoration: none;
+	color: #AAA;
+	float:right;
+}
+
+.easysliderslideshow.styled2 .controls div {
+	height:16px;
+	width:16px;
+	float:left;
+	margin-left:2px;
+}
+
+/*
+	Pagination
+*/
