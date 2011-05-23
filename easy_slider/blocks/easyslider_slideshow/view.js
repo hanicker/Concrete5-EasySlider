@@ -39,11 +39,13 @@
 											if (easyslider_autostart == 0)
 												easyslider_slide_viewing_time = 0;
 											var playCustom = function(sindex,current) {
-												if (easyslider_slide_viewing_time != 0)
-													return easyslider_slide_viewing_time;
+												if (easyslider_autostart == 0)
+													return 0;
 												if (easy_slider_slideshow_configs['default'][sindex]['slideTimes'][current] != 0) {
 													return easy_slider_slideshow_configs['default'][sindex]['slideTimes'][current];
 												}
+												if (easyslider_slide_viewing_time != 0)
+													return easyslider_slide_viewing_time;												
 												return 0;
 											}
 											slide = $(this)
