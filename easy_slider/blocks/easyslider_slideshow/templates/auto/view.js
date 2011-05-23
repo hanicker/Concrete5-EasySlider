@@ -23,8 +23,6 @@
 											var easyslider_display_pagination = easy_slider_slideshow_configs['auto'][index]['showPagination'];
 											var easyslider_slide_viewing_time = easy_slider_slideshow_configs['auto'][index]['slideTime'];
 											var easyslider_slide_hover_pause = easy_slider_slideshow_configs['auto'][index]['hoverPause'];
-											if (easyslider_autostart == 0)
-												easyslider_slide_viewing_time = 0;
 											var playCustom = function(sindex,current) {
 												if (easy_slider_slideshow_configs['auto'][sindex]['slideTimes'][current] != 0) {
 													return easy_slider_slideshow_configs['auto'][sindex]['slideTimes'][current];
@@ -63,7 +61,7 @@
 													$('.stop',ele).parent().hide();											
 												}
 											}
-											if(playCustom(0)!=0){
+											if(easyslider_autostart!=0){
 												switchPlayPause();
 											}
 											$('.play',this).click(function(){switchPlayPause()});

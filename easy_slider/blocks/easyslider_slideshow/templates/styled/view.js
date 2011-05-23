@@ -10,7 +10,7 @@
 	$(document)
 			.ready(
 					function() {
-						$('.easysliderslideshow.styled').append('<a href="#" class="prev"><img src="'+easyslider_slideshowblock_path+'/templates/styled/images/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a><a href="#" class="next"><img src="'+easyslider_slideshowblock_path+'/templates/styled/images/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>');
+
 						
 						//Activate slideshow
 						$('.easysliderslideshow.styled')
@@ -21,8 +21,6 @@
 											var easyslider_display_pagination = easy_slider_slideshow_configs['styled'][index]['showPagination'];
 											var easyslider_slide_viewing_time = easy_slider_slideshow_configs['styled'][index]['slideTime'];
 											var easyslider_slide_hover_pause = easy_slider_slideshow_configs['styled'][index]['hoverPause'];
-											if (easyslider_autostart == 0)
-												easyslider_slide_viewing_time = 0;
 											var playCustom = function(sindex,current) {
 												if (easy_slider_slideshow_configs['styled'][sindex]['slideTimes'][current] != 0) {
 													return easy_slider_slideshow_configs['styled'][sindex]['slideTimes'][current];
@@ -31,11 +29,14 @@
 													return easyslider_slide_viewing_time;												
 												return 0;
 											}
+											if(easyslider_display_control_panel == 1){
+												$('.easysliderslideshow.styled').append('<a href="#" class="prev"><img src="'+easyslider_slideshowblock_path+'/templates/styled/images/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a><a href="#" class="next"><img src="'+easyslider_slideshowblock_path+'/templates/styled/images/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>');
+											}
 											slide = $(this)
 													.slides(
 															{//Here you can use slidejs settings, see them in http://slidesjs.com/
 																preload : true,
-																generateNextPrev : (easyslider_display_control_panel == 1),
+																generateNextPrev : false,
 																generatePagination : (easyslider_display_pagination == 1),
 																play : (easyslider_autostart == 0)?0:1000,
 																pause : 3000,
