@@ -15,6 +15,7 @@
 */
 
 .easysliderslideshow.auto .slides_container {
+	clear:both;
 	overflow:hidden;
 	position:relative;
 	display:none;
