@@ -47,12 +47,6 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 		<h2><?php echo t('Slide time (milliseconds)')?></h2>
 		<?php echo $form->text('slideTime', $slideTime); ?>
 	</div>
-	<?php 
-		echo $form->hidden('autostart','0');
-		echo $form->hidden('showControls','0');
-		echo $form->hidden('showPagination','0');
-		echo $form->hidden('hoverPause','0');
-	?>
 </div>
 <input type="hidden" name="isLast" id="isLastValue" value="0" />
 <script type="text/javascript">
