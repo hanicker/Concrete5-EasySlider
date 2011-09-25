@@ -3,7 +3,7 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 ?>
 <div class="ccm-block-field-group">
 	<h2><?php echo t('This is the last slide of the slideshow')?></h2>
-	<?php echo t('(Check for yes)') ?> <?php echo $form->checkbox('isLast', '1', $isLast==1); ?>
+	<?php echo t('(Check for yes)') ?> <?php echo $form->checkbox('isLast_', '1', $isLast==1); ?>
 </div>
 <div id="easyslider_slideshow_isLast" <?php echo !($isLast==1)?'style="display:none"':'' ?>>
 	<p><?php echo t('By setting following fields you will redefine this slideshow settings for every slide. You can redefine settings of each slide by modifying single transition block')?></p>
@@ -48,13 +48,13 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 		<?php echo $form->text('slideTime', $slideTime); ?>
 	</div>
 	<?php 
-		echo $form->hidden('isLast','0');
 		echo $form->hidden('autostart','0');
 		echo $form->hidden('showControls','0');
 		echo $form->hidden('showPagination','0');
 		echo $form->hidden('hoverPause','0');
 	?>
 </div>
+<input type="hidden" name="isLast" id="isLastValue" value="0" />
 <script type="text/javascript">
 <?php echo $isLast==1?'easyslider_slideshow_enableLast()':'easyslider_slideshow_disableLast()' ?>
 </script>
