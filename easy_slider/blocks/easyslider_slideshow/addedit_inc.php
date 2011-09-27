@@ -9,7 +9,7 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 	<p><?php echo t('By setting following fields you will redefine this slideshow settings for every slide. You can redefine settings of each slide by modifying single transition block')?></p>
 	<div class="ccm-block-field-group">
 		<h2><?php echo t('Default slide time (milliseconds), leave 0 to use customized per-slide settings')?></h2>
-		<?php echo $form->text('slideTime', $slideTime); ?>
+		<?php echo $form->text('slideTime_', $slideTime); ?>
 	</div>	
 	<div class="ccm-block-field-group">
 		<h2><?php echo t('Autostart')?></h2>
@@ -45,10 +45,11 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 <div id="easyslider_slideshow_isNotLast" <?php echo $isLast==1?'style="display:none"':'' ?>>
 	<div class="ccm-block-field-group">
 		<h2><?php echo t('Slide time (milliseconds)')?></h2>
-		<?php echo $form->text('slideTime', $slideTime); ?>
+		<?php echo $form->text('slideTime__', $slideTime); ?>
 	</div>
 </div>
 <input type="hidden" name="isLast" id="isLastValue" value="0" />
+<input type="hidden" name="slideTime" id="slideTimeValue" value="0" />
 <script type="text/javascript">
 <?php echo $isLast==1?'easyslider_slideshow_enableLast()':'easyslider_slideshow_disableLast()' ?>
 </script>
